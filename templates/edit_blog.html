@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog</title>
+    <style>
+        body, html {
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        .form-container {
+            width: 400px;
+            height: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a class="navbar-brand" href="{% url 'indexPage' %}">BlogWebsite</a>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Edit Blog</h1>
+            <form method="post" action="{% url 'edit_blog' blog_id=blog.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="blog_title">Blog Title</label>
+                    <input type="text" id="blog_title" name="blog_title" class="form-control" value="{{ blog.blog_title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="blog_text">Blog Text</label>
+                    <textarea id="blog_text" name="blog_text" class="form-control" required>{{ blog.blog_text }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="blog_image">Blog Image</label>
+                    <input type="file" id="blog_image" name="blog_image" class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Blog</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom CSS styles here */
+        .imgSize {
+            /* Define your image size styles here */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-md-auto mx-3 mt-5 mb-5">
+                <!-- Adjust the column size as needed -->
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="fw-bold text-center">{{ blog.blog_title }}</h2>
+                        <a href="#">
+                            {% if blog.blog_Img %}
+                            <img src="{{ blog.blog_Img.url }}" alt="{{ blog.blog_title }}" class="card-img-top imgSize">
+                            {% endif %}
+                        </a>
+                        <p class="card-text">{{ blog.blog_text }}</p>
+                        <p class="card-text">Published Date: {{ blog.blog_date }}</p>
+                        <p class="card-text">Last Updated: {{ blog.BlogUpdate_date }}</p>
+                        <!-- You may add more details here if needed -->
+                        <div class="text-center">
+                            <a href="{% url 'edit_blog' blog_id=blog.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'delete_blog' blog_id=blog.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

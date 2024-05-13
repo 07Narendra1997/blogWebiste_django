@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Blog</title>
+</head>
+<body>
+    <a class="navbar-brand" href="{% url 'indexPage' %}">BlogWebsite</a>
+   
+
+    <div class="container">
+        <h1>Delete Blog</h1>
+        <p>Are you sure you want to delete "{{ blog.blog_title }}"?</p>
+        <form method="post" action="{% url 'delete_blog' blog_id=blog.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</body>
+</html>

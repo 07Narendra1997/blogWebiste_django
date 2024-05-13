@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlogWebsites</title>
+
+    <link href="{% static 'index_style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+
+  </head>
+  <style>
+    
+  </style>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky top-0 z-1"
+      style="background-color: rgb(134, 94, 94); height: 100%"
+    >
+  
+    <div  class="container-fluid" > 
+      
+      <a class="navbar-brand" href="{% url 'indexPage' %}">BlogWebsite</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-50" >
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Members <span class="sr-only"></span
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_blog' %}">Add New Blog</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0 d-flex m-4 gap-4">
+          <input
+            
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search Blog"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+    </nav>
+
+    <div class="container mt-4">
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for blog in blogs %}
+        <div class="col-md-10 col-12 mx-md-auto mx-3 mt-5 mb-5">
+          <!-- Adjust the column size as needed -->
+          <div class="card">
+            <h2 class =  "fw-bold text-center" >{{ blog.blog_title }}</h2>
+            <a href="#">
+              {% if blog.blog_Img %}
+              <img
+                src="{{ blog.blog_Img.url }}"
+                alt="{{ blog.blog_title }}"
+                class="card-img-top"
+                class ="imgSize"
+              />
+              {% endif %}
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ blog.blog_text }}</p>
+              <p class="card-text">Published Date: {{ blog.blog_date }}</p>
+              <p class="card-text">Last Updated: {{ blog.BlogUpdate_date }}</p>
+              <a href="{% url 'edit_blog' blog_id=blog.id %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'view_blog' blog_id=blog.id %}" class="btn btn-success">View</a>
+              <a href="{% url 'delete_blog' blog_id=blog.id %}" class="btn btn-danger">Delete</a>
+
+            </div>
+            
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
